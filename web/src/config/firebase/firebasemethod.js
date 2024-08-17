@@ -4,8 +4,12 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth"; // TODO: Add SDKs for Firebase products that you want to use
+  onAuthStateChanged
+} from "firebase/auth";
+import { getFirestore,  collection, addDoc, getDocs, getDoc, doc  } from "firebase/firestore"; 
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+ // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
@@ -23,12 +27,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-function register(email, password) {
+
+async function register(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
 
-function login(email, password) {
+async function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     //   alert("Success");
@@ -39,5 +46,61 @@ function login(email, password) {
     //   alert(errorMessage);
     });
 }
+async function addProduct(product) {
 
-export { register, login };
+  const {title, description, price, image} = product
+  const storageRef = ref(storage, 'products/' + image.name);
+  await uploadBytes(storageRef, image)
+  const url = await getDownloadURL(storageRef)
+
+  return addDoc(collection(db, "products"), {
+    title, description, price, image: url
+    });
+}
+// async function getProducts() {
+//   const productsCol = collection(db, "products");
+//   const productSnapshot = await getDocs(productsCol);
+//   const productList = productSnapshot.docs.map((doc) => ({
+//     id: doc.id,
+//     ...doc.data()
+//   }));
+//   return productList;
+// }
+async function getProducts(){
+const querySnapshot = await getDocs(collection(db, "products"));
+const products = []
+querySnapshot.forEach((doc) => {
+  const data = doc.data()
+  data.id = doc.id
+  // doc.data() is never undefined for query doc snapshots
+  // console.log(doc.id, " => ", doc.data());
+  products.push(data)
+});
+return products
+}
+
+async function getProductById(id) {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return { ...docSnap.data(), id: docSnap.id };
+  } else {
+    throw new Error("No such document!");
+  }
+}
+
+
+// async function getProductById(id){
+// const docRef = doc(db, "products", "id");
+// const docSnap = await getDoc(docRef);
+
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // docSnap.data() will be undefined in this case
+//   console.log("No such document!");
+// }
+// return docSnap
+// }
+
+export { register, login, onAuthStateChanged, auth, addProduct, getProducts, getProductById };

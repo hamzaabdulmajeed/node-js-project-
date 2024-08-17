@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { register } from "../../config/firebase/firebasemethod";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-// import "./index.css";
+import { toast } from "react-toastify";
+import "./index.css";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -13,9 +12,7 @@ export default function Register() {
     try {
       await register(email, password);
       toast.success("Login Successful!");
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
+      navigate("/login");
     } catch (error) {
       toast.error(error.message);
     }
@@ -23,8 +20,6 @@ export default function Register() {
 
   return (
     <div className="register-container">
-      
-
       <h2>Register</h2>
 
       <div className="form-group">

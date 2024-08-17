@@ -1,0 +1,53 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f9fa;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theme-box {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.theme-box:hover {
+  transform: scale(1.1);
+}
+
+.red {
+  background-color: #e74c3c;
+}
+
+.blue {
+  background-color: #3498db;
+}
+
+.green {
+  background-color: #2ecc71;
+}
+
+.cart-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.cart-count {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}

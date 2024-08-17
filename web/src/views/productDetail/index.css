@@ -1,0 +1,17 @@
+
+.product-detail-card{
+
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+ .product-detail img{
+    height: 40vh;
+   
+}
+
+.product-detail-card p{
+    font-weight: 600;
+        
+    } 
