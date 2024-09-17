@@ -26,16 +26,16 @@
   transform: scale(1.1);
 }
 
-.red {
-  background-color: #e74c3c;
+.black {
+  background-color: black;
 }
 
 .blue {
-  background-color: #3498db;
+  background-color: blue;
 }
 
-.green {
-  background-color: #2ecc71;
+.moccasin {
+  background-color: rgb(95, 77, 44);
 }
 
 .cart-icon {

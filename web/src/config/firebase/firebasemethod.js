@@ -4,7 +4,8 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  signOut
 } from "firebase/auth";
 import { getFirestore,  collection, addDoc, getDocs, getDoc, doc  } from "firebase/firestore"; 
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -38,14 +39,18 @@ async function register(email, password) {
 async function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-    //   alert("Success");
+      alert("Success");
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-    //   alert(errorMessage);
+      alert(errorMessage);
     });
 }
+async function logout() {  // New logout function
+  return signOut(auth);
+}
+
 async function addProduct(product) {
 
   const {title, description, price, image} = product
@@ -103,4 +108,4 @@ async function getProductById(id) {
 // return docSnap
 // }
 
-export { register, login, onAuthStateChanged, auth, addProduct, getProducts, getProductById };
+export { register, login, logout, onAuthStateChanged, auth, addProduct, getProducts, getProductById };

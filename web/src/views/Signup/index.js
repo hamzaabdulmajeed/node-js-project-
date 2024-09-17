@@ -11,11 +11,14 @@ export default function Register() {
   const signUp = async () => {
     try {
       await register(email, password);
-      toast.success("Login Successful!");
+      alert("register Successful!");
       navigate("/login");
     } catch (error) {
-      toast.error(error.message);
+      alert(error.message);
     }
+  };
+  const navigateToLogin = () => {
+    navigate("/login");  // Navigate to the Signup page
   };
 
   return (
@@ -43,6 +46,12 @@ export default function Register() {
         />
       </div>
       <button onClick={() => signUp()}>Register</button>
+      <p className="signup-prompt">
+        Allready have an account?{" "}
+        <span onClick={navigateToLogin} className="signup-link">
+          Login here
+        </span>
+      </p>
     </div>
   );
 }

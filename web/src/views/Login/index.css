@@ -1,10 +1,12 @@
-.login-container {
-    display: block;
+/* .login-container {
+    display: flex;
+    flex-direction: column;
     justify-content: center !important;
    height: 55VH;
     background-color: white;
     align-items: center;
     width: 50vh;
+    margin: 0px auto;
   }
   .login-container h2 {
   
@@ -14,9 +16,9 @@
   .login-form {
     
     
-/* ba    ckground: white; */
+
     padding: 2rem;
-    /* border-radius: 5px; */
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     
   }
@@ -43,11 +45,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
   }
-  
-  /* .error {
-    color: red;
-    margin-bottom: 1rem;
-  } */
+
   
   button {
     width: 70%;
@@ -63,4 +61,72 @@
   
   button:hover {
     background-color: #1a1d1d;
+  } */
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+    background-color: #f9f9f9;
+    width: 35%; /* Reduced width for better look */
+    margin: 5% auto; /* Center vertically and horizontally */
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #ddd; /* Light border for subtle structure */
   }
+  
+  .login-container h2 {
+    color: #333;
+    margin-bottom: 1.5rem; /* Add space below the heading */
+  }
+  
+  .login-form {
+    width: 100%;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem; /* Space between input fields */
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Ensure padding is inside the width */
+  }
+  
+  button {
+    width: 100%; /* Full-width button */
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  button:hover {
+    background-color: #1a1d1d; /* Slightly lighter on hover */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .login-container {
+      width: 90%; /* Adjust for smaller screens */
+    }
+  }
+  

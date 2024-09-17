@@ -1,53 +1,63 @@
 
 
+
 .register-container {
   display: block;
-  justify-content: center !important;
- height: 55VH;
-  background-color: white;
+  justify-content: center;
   align-items: center;
+  height: auto; /* Adjusts height dynamically to content */
+  background-color: white;
   width: 50vh;
-  }
-  .register-container h2 {
-    color: black;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    justify-content: center;
-    color: black;
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-  }
-  
-  .form-group input {
-    width: 80%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  .error {
-    color: red;
-    margin-bottom: 1rem;
-  }
-  .button {
-    width: 70%;
-    padding: 0.75rem;
-    margin: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #1a1d1d;
-  }
-  
-  
+  padding: 50px; /* Adds padding inside the box */
+  margin: 0 auto;
+ margin-top: 70px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for box */
+}
+
+.register-container h2 {
+  color: black;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  color: black;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensures padding is included in element width */
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #1a1d1d;
+}
