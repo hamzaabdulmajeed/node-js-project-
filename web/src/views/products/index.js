@@ -23,7 +23,7 @@ export default function ProductList() {
   // }, [])
 
   const buyNow = (product) => {
-    navigate(`/productDetail/${product.id}`);
+    navigate(`/productDetail/${product._id}`);
   };
 
   const { Meta } = Card;
@@ -36,7 +36,7 @@ export default function ProductList() {
           products.map((product) => (
             <Card
               className="product-item"
-              key={product.id}
+              key={product._id}
               hoverable
               // style={{
               //   width: 240,

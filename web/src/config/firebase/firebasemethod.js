@@ -52,16 +52,31 @@ async function logout() {  // New logout function
 }
 
 async function addProduct(product) {
-
   const {title, description, price, image} = product
   const storageRef = ref(storage, 'products/' + image.name);
   await uploadBytes(storageRef, image)
   const url = await getDownloadURL(storageRef)
 
-  return addDoc(collection(db, "products"), {
-    title, description, price, image: url
-    });
+
+  fetch('http://localhost:3002/products/addProduct', {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        title: title,
+        description: description,
+        price: price,
+         image: url
+    })
+}).then(res => res.json())
+.then(res => console.log(res))
+
+//   return addDoc(collection(db, "products"), {
+//     title, description, price, image: url
+//     });
 }
+
 // async function getProducts() {
 //   const productsCol = collection(db, "products");
 //   const productSnapshot = await getDocs(productsCol);
@@ -71,29 +86,74 @@ async function addProduct(product) {
 //   }));
 //   return productList;
 // }
-async function getProducts(){
-const querySnapshot = await getDocs(collection(db, "products"));
-const products = []
-querySnapshot.forEach((doc) => {
-  const data = doc.data()
-  data.id = doc.id
-  // doc.data() is never undefined for query doc snapshots
-  // console.log(doc.id, " => ", doc.data());
-  products.push(data)
-});
-return products
-}
+// async function getProducts(){
+  
+  async function getProducts() {
+    try {
+      const response = await fetch('http://localhost:3002/products', {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();  // Parse the JSON data
+      console.log(data);  // Log the data to verify the response
+      return data;  // You can return this data and use it in your application
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  }
+// const querySnapshot = await getDocs(collection(db, "products"));
+// const products = []
+// querySnapshot.forEach((doc) => {
+//   const data = doc.data()
+//   data.id = doc.id
+//   // doc.data() is never undefined for query doc snapshots
+//   // console.log(doc.id, " => ", doc.data());
+//   products.push(data)
+// });
+// return products
+// }
 
-async function getProductById(id) {
-  const docRef = doc(db, "products", id);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    return { ...docSnap.data(), id: docSnap.id };
-  } else {
-    throw new Error("No such document!");
+// async function getProductById(id) {
+//   const docRef = doc(db, "products", id);
+//   const docSnap = await getDoc(docRef);
+//   if (docSnap.exists()) {
+//     return { ...docSnap.data(), id: docSnap.id };
+//   } else {
+//     throw new Error("No such document!");
+//   }
+// }
+
+// async function getProductById(_id) {
+//   try {
+//     const response = await fetch(`http://localhost:3002/products/${_id}`);
+//     return response.data; // Returns the product data from MongoDB
+//   } catch (error) {
+//     console.error("Error fetching product by ID:", error);
+//     throw error;
+//   }
+// }
+async function getProductById(_id) {
+  try {
+      const response = await fetch(`http://localhost:3002/products/${_id}`);
+      
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const productData = await response.json();
+      return productData;
+  } catch (error) {
+      console.error("Error fetching product by ID:", error);
+      throw error;
   }
 }
-
 
 // async function getProductById(id){
 // const docRef = doc(db, "products", "id");

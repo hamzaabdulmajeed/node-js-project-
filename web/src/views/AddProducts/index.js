@@ -3,12 +3,17 @@ import { toast } from "react-toastify";
 import { addProduct } from "../../config/firebase/firebasemethod";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const baseUrl = "http://localhost:3002"
+
 export default function AddProduct() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState(null);
   const navigate = useNavigate()
+
+  
   const onSubmit = async () => {
     try {
       await addProduct({ title, description, price, image });
@@ -50,6 +55,4 @@ export default function AddProduct() {
     </div>
   );
 }
-
-
 
